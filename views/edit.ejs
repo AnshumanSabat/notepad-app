@@ -22,8 +22,6 @@
     </style>
 </head>
 <body class="min-h-screen bg-page text-text">
-
-    <!-- Navbar -->
     <nav class="flex justify-between items-center px-8 py-4 bg-surface border-b border-border overflow-hidden">
         <div class="flex items-center gap-3">
             <img class="rounded-lg w-15 h-15 object-cover object-center" src="/images/taskmanager_logo.png">
@@ -31,16 +29,14 @@
         </div>
         <div class="flex gap-1">
             <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">Home</a>
-            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">About</a>
-            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">Contact</a>
         </div>
     </nav>
 
 
-      <!-- Main -->
+     
     <div class="max-w-3xl mx-auto px-6 py-10">
 
-        <!-- Create task card -->
+       
         <div class="bg-surface border border-border rounded-2xl p-6 mb-10">
             <h2 class="text-sm font-semibold text-text mb-5 uppercase tracking-widest">Update Note</h2>
             <form action="/edit/<%=note._id%>" method="post" class="flex flex-col gap-3">
