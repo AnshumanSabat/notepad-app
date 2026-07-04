@@ -17,5 +17,5 @@ https://notepad-app-hveu.onrender.com
 - MongoDB
 - EJS
 
-##features to be added
--security and user authorization by jwt,bycrypt
+## Features to be added
+- security and user authorization by jwt,bycrypt
