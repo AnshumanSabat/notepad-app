@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-page: #1E1E2E;
+            --color-surface: #313244;
+            --color-hover: #45475A;
+            --color-border: #45475A;
+            --color-accent: #7C3AED;
+            --color-accent-hover: #6D28D9;
+            --color-text: #CDD6F4;
+            --color-muted: #A6ADC8;
+            --color-subtle: #6C7086;
+            --color-done: #A6E3A1;
+            --color-danger: #F38BA8;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-page text-text">
+
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-8 py-4 bg-surface border-b border-border overflow-hidden">
+        <div class="flex items-center gap-3">
+            <img class="rounded-lg w-15 h-15 object-cover object-center" src="/images/taskmanager_logo.png">
+            <h1 class="text-lg font-semibold tracking-tight text-text">Task Manager</h1>
+        </div>
+        <div class="flex gap-1">
+            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">Home</a>
+            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">About</a>
+            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">Contact</a>
+        </div>
+    </nav>
+
+
+      <!-- Main -->
+    <div class="max-w-3xl mx-auto px-6 py-10">
+
+        <!-- Create task card -->
+        <div class="bg-surface border border-border rounded-2xl p-6 mb-10">
+            <h2 class="text-sm font-semibold text-text mb-5 uppercase tracking-widest">Update Note</h2>
+            <form action="/edit/<%=note._id%>" method="post" class="flex flex-col gap-3">
+                <input
+                    type="text"
+                    value="<%=note.title%>"
+                    name="title"
+                    class="w-full bg-page border border-border text-text placeholder-subtle rounded-xl px-4 py-2.5 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition hover:scale-105 transition-all duration-320"
+                >
+                <textarea
+                    value="<%=note.details%>"
+                    name="details"
+                    rows="3"
+                    class="w-full bg-page border border-border text-text placeholder-subtle rounded-xl px-4 py-2.5 text-sm outline-none resize-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition hover:scale-105 transition-all duration-320"
+                ><%=note.details%></textarea>
+                <div>
+                    <input
+                        type="submit"
+                        value="Update Note"
+                        class="bg-accent hover:bg-accent-hover text-white text-sm font-medium px-5 py-2 rounded-xl cursor-pointer transition-colors duration-150"
+                    >
+                </div>
+            </form>
+        </div>

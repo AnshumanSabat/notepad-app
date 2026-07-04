@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-page: #1E1E2E;
+            --color-surface: #313244;
+            --color-hover: #45475A;
+            --color-border: #45475A;
+            --color-accent: #7C3AED;
+            --color-accent-hover: #6D28D9;
+            --color-text: #CDD6F4;
+            --color-muted: #A6ADC8;
+            --color-subtle: #6C7086;
+            --color-done: #A6E3A1;
+            --color-danger: #F38BA8;
+            --color-pin: #F9E2AF;
+            --color-pin-hover: #FAB387; 
+            --color-show: #89B4FA;      
+             --color-show-hover: #74C7EC;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-page text-text overflow-hidden">
+      <nav class="flex justify-between items-center px-8 py-2 bg-surface border-b border-border w-full ">
+        <div class="flex items-center gap-3">
+            <img class=" rounded-lg w-15 h-15 object-cover object-centers" src="/images/taskmanager_logo.png">
+            <h1 class="text-lg font-semibold tracking-tight text-text">Note Manager</h1>
+        </div>
+        <div class="flex gap-1">
+            <a href="/home" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">Home</a>
+            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">About</a>
+            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">Contact</a>
+        </div>
+    </nav>
+     <h1 class="text-8xl text-danger text-text font-bold text-center">--<%=notes.title%>--</h1>
+      
+               <div class="flex justify-center mt-10 hover:scale-105 transition-all duration-320">
+    <div class="bg-surface border border-border rounded-2xl p-10 max-w-4xl w-full">
+        <h2 class="text-5xl text-text">
+            <%= notes.details %>
+        </h2>
+        
+    </div>
+   
+</div>
+
+        
+        
+    
+
+
+    </body>

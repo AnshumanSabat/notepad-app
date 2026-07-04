@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-page: #1E1E2E;
+            --color-surface: #313244;
+            --color-hover: #45475A;
+            --color-border: #45475A;
+            --color-accent: #7C3AED;
+            --color-accent-hover: #6D28D9;
+            --color-text: #CDD6F4;
+            --color-muted: #A6ADC8;
+            --color-subtle: #6C7086;
+            --color-done: #A6E3A1;
+            --color-danger: #F38BA8;
+            --color-pin: #F9E2AF;
+            --color-pin-hover: #FAB387; 
+            --color-show: #89B4FA;      
+             --color-show-hover: #74C7EC;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-page text-text overflow-hidden">
+
+    
+    <nav class="flex justify-between items-center px-8 py-2 bg-surface border-b border-border w-full ">
+        <div class="flex items-center gap-3">
+            <img class=" rounded-lg w-15 h-15 object-cover object-centers" src="/images/taskmanager_logo.png">
+            <h1 class="text-lg font-semibold tracking-tight text-text">Note Manager</h1>
+        </div>
+        <div class="flex gap-1">
+            <a href="/home" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">Home</a>
+            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">About</a>
+            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-muted hover:bg-hover hover:text-text transition-colors duration-150">Contact</a>
+        </div>
+    </nav>
+
+  
+    <div class="max-w-3xl mx-auto px-6 py-10">
+
+        <!-- Create task card -->
+        <div class="bg-surface border border-border rounded-2xl p-6 mb-10 ">
+            <h2 class="text-sm font-semibold text-text mb-5 uppercase tracking-widest">New Note</h2>
+            <form action="/create" method="post" class="flex flex-col gap-3 required">
+                <input
+                    type="text"
+                    placeholder="Note title"
+                    name="title"
+                    class="w-full bg-page border border-border text-text placeholder-subtle rounded-xl px-4 py-2.5 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition hover:scale-105 transition-all duration-320"
+                >
+                <textarea
+                    placeholder="Add details..."
+                    name="details"
+                    rows="3"
+                    class="w-full bg-page border border-border text-text placeholder-subtle rounded-xl px-4 py-2.5 text-sm outline-none resize-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition hover:scale-105 transition-all duration-320"
+                ></textarea>
+                <div>
+                    <input
+                        type="submit"
+                        value="Add Note"
+                        class="bg-accent hover:bg-accent-hover text-white text-sm font-medium px-5 py-2 rounded-xl cursor-pointer transition-colors duration-150"
+                    >
+                </div>
+            </form>
+        </div>
+
+       
+        <div>
+            <p class="text-xs font-semibold text-subtle uppercase tracking-widest mb-4">Your Notes</p>
+
+            <% if(notes.length > 0){ %>
+                <div class="flex flex-col gap-3">
+                <% notes.forEach(function(note){ %>
+                    <div class="bg-surface border border-border hover:border-accent/30 rounded-2xl px-6 py-5 transition-all duration-200 hover:shadow-lg hover:shadow-accent/5">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="w-2 h-2 rounded-full bg-accent shrink-0 mt-0.5"></span>
+                                <h2 class="text-base font-semibold text-text truncate">
+                                    <%= note.title %>
+                                </h2>
+                            </div>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <a href="/edit/<%=note._id%>"
+                                   class="text-xs font-medium px-3 py-1 rounded-lg bg-done/10 text-done hover:bg-done/20 transition-colors duration-150">
+                                    Edit
+                                </a>
+                                <a href="/delete/<%=note._id%>"
+                                   class="text-xs font-medium px-3 py-1 rounded-lg bg-danger/10 text-danger hover:bg-danger/20 transition-colors duration-150">
+                                    Delete
+                                </a>
+                                <a href="/show/<%=note._id%>"
+                                   class="text-xs font-medium px-3 py-1 rounded-lg bg-show/10 text-show hover:bg-show-hover/20 transition-colors duration-150">
+                                    Show
+                                </a>
+                                <a href="/pin/<%= note._id %>" class="text-xs font-medium px-3 py-1 rounded-lg bg-pin/10 text-pin hover:bg-pin-hover/20 transition-colors duration-150">
+
+                                                            <% if(note.pinned){ %>
+                                                                     Unpin 🔴
+                                                                  <% } else { %>
+                                                                             Pin
+                                                                             <% } %>
+
+                                </a>
+                            </div>
+                        </div>
+                        <p class="text-sm text-muted mt-2 leading-relaxed pl-5">
+                            <%= note.details %>
+                        </p>
+                    </div>
+                <% }) %>
+                </div>
+            <% } else { %>
+                <div class="flex flex-col items-center justify-center py-16 rounded-2xl border border-dashed border-border">
+                    <svg class="mb-3 text-border" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="3"/>
+                        <path d="M9 12h6M12 9v6"/>
+                    </svg>
+                    <p class="text-sm text-subtle">No notes yet — add one above</p>
+                </div>
+            <% } %>
+        </div>
+
+    </div>
+</body>
+</html>                             
+           
