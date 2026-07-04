@@ -16,3 +16,6 @@ https://notepad-app-hveu.onrender.com
 - Express.js
 - MongoDB
 - EJS
+
+##features to be added
+-security and user authorization by jwt,bycrypt
