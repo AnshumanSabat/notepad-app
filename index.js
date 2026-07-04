@@ -17,51 +17,87 @@ app.use(express.static(path.join(__dirname, 'public'))); // basically ye public 
     let createduser = await usermodel.create({
         title:title,
         details:details,
+         userId: "demoUser1", 
     });
      res.redirect("/");
     }) ;                 
     app.post('/edit/:id',async function(req,res){
       let {title,details} = req.body;
-    let upuser = await usermodel.findOneAndUpdate({_id :req.params.id},{title,details});
+    let upuser =  await usermodel.findOneAndUpdate(
+    {
+      _id: req.params.id,
+      userId: "demoUser1"
+    },
+    { title, details }
+  );
      res.redirect("/");});
     
+app.get("/pin/:id", async function(req, res) {
 
-     app.get("/pin/:id", async function(req, res) {
+  const note = await usermodel.findOne({
+    _id: req.params.id,
+    userId: "demoUser1"
+  });
 
-    const note = await usermodel.findById(req.params.id);
+  if (!note) return res.redirect("/");
 
-    await usermodel.findByIdAndUpdate(req.params.id, {
-        pinned: !note.pinned
-    });
+  await usermodel.findOneAndUpdate(
+    {
+      _id: req.params.id,
+      userId: "demoUser1"
+    },
+    {
+      pinned: !note.pinned
+    }
+  );
+
+  res.redirect("/");
+});
    app.get("/empty",function(req,res){
-         res.render()
+         res.render("empty");
    });
 
-    res.redirect("/");
-});
+   
   
 
     
 app.get("/", async function (req,res){
-  const notes = await usermodel.find().sort({ pinned: -1 });
+  const notes = await usermodel.find({ userId: "demoUser1" }).sort({ pinned: -1 });
     res.render("index",{notes});
     
 });
-app.get("/edit/:id", async function (req,res){
- const note = await usermodel.findById(req.params.id);
-    res.render("edit",{note});
-    
+app.get("/edit/:id", async function(req,res){
+
+  const note = await usermodel.findOne({
+    _id: req.params.id,
+    userId: "demoUser1"
+  });
+
+  if (!note) return res.redirect("/");
+
+  res.render("edit", { note });
 });
+    
+
 app.get("/delete/:id", async function (req,res){
-  const notes = await usermodel.findOneAndDelete({_id :req.params.id});
+  const notes =  await usermodel.findOneAndDelete({
+    _id: req.params.id,
+    userId: "demoUser1"
+  });
     res.redirect("/");
     
 });
-app.get("/show/:id", async function (req,res){
-  const notes = await usermodel.findOne({_id :req.params.id});
-    res.render("show",{notes});
-    
+app.get("/show/:id", async function(req,res){
+
+  const notes = await usermodel.findOne({
+    _id: req.params.id,
+    userId: "demoUser1"
+  });
+
+  res.render("show", { notes });
 });
+    
+
 app.get("/home", async function(req,res){
   res.render("home");
 })
