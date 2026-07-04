@@ -65,4 +65,4 @@ app.get("/show/:id", async function (req,res){
 app.get("/home", async function(req,res){
   res.render("home");
 })
-app.listen(4000);
+app.listen(process.env.PORT || 4000);
