@@ -18,4 +18,4 @@ https://notepad-app-hveu.onrender.com
 - EJS
 
 ## Features to be added
-- security and user authorization by jwt,bycrypt
+- Security and user authorization by jwt,bycrypt
