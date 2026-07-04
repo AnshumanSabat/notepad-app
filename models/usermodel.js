@@ -8,10 +8,9 @@ const taskSchema = new mongoose.Schema({
         default: false
     },
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    }
+    type: String,
+    required: true
+},
 }, { timestamps: true });
 
 module.exports = mongoose.model("usermodel", taskSchema);
